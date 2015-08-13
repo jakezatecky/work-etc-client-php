@@ -15,7 +15,7 @@ interface HttpInterface
 	 *
 	 * @return array
 	 */
-	public function get($endpoint, array $parameters);
+	public function get($endpoint, array $parameters = []);
 
 	/**
 	 * Invoke a POST request.
@@ -25,6 +25,6 @@ interface HttpInterface
 	 *
 	 * @return array
 	 */
-	public function post($endpoint, array $parameters);
+	public function post($endpoint, array $parameters = []);
 
 }
