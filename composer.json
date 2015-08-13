@@ -19,7 +19,8 @@
 		"nategood/httpful": "~0.2.19"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.8"
+		"phpunit/phpunit": "~4.8",
+		"mockery/mockery": "~0.9.4"
 	},
 	"autoload": {
 		"psr-4": {
