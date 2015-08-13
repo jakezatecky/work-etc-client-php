@@ -27,4 +27,11 @@ interface HttpInterface
 	 */
 	public function post($endpoint, array $parameters = []);
 
+	/**
+	 * Returns whether or not errors have occurred.
+	 *
+	 * @return bool
+	 */
+	public function hasErrors();
+
 }

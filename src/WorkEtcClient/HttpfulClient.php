@@ -7,6 +7,11 @@ class HttpfulClient implements HttpInterface
 {
 
 	/**
+	 * @var bool
+	 */
+	protected $hasErrors = false;
+
+	/**
 	 * Invoke a GET request.
 	 *
 	 * @param string $endpoint
@@ -16,11 +21,10 @@ class HttpfulClient implements HttpInterface
 	 */
 	public function get($endpoint, array $parameters = [])
 	{
-		$response = Request::get($endpoint . $this->buildQuery($parameters))
-			->expects('application/json')
-			->send();
+		$request = Request::get($endpoint . $this->buildQuery($parameters))
+			->expects('application/json');
 
-		return $response->body;
+		return $this->send($request)->body;
 	}
 
 	/**
@@ -33,12 +37,27 @@ class HttpfulClient implements HttpInterface
 	 */
 	public function post($endpoint, array $parameters = [])
 	{
-		$response = Request::post($endpoint)
+		$request = Request::post($endpoint)
 			->expects('application/json')
-			->body(json_encode($parameters))
-			->send();
+			->body(json_encode($parameters));
 
-		return $response->body;
+		return $this->send($request)->body;
+	}
+
+	/**
+	 * Send the request and check for errors.
+	 *
+	 * @param \Httpful\Request $request
+	 *
+	 * @return \Httpful\Response
+	 */
+	protected function send(Request $request)
+	{
+		$response = $request->send();
+
+		$this->hasErrors = $response->hasErrors();
+
+		return $response;
 	}
 
 	/**
@@ -55,6 +74,16 @@ class HttpfulClient implements HttpInterface
 		}
 
 		return '?' . http_build_query($data);
+	}
+
+	/**
+	 * Returns whether or not errors have occurred.
+	 *
+	 * @return bool
+	 */
+	public function hasErrors()
+	{
+		return $this->hasErrors;
 	}
 
 }

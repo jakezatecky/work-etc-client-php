@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/responses.php';
+
 use Mockery as m;
 use WorkEtcClient\HttpfulClient;
 
@@ -18,7 +20,9 @@ class HttpfulClientTest extends \PHPUnit_Framework_TestCase
 		];
 
 		$this->request = m::mock('alias:Httpful\Request');
-		$this->request->body = $this->response;;
+
+		$this->goodResponse = new GoodResponse();
+		$this->badResponse = new BadResponse();
 	}
 
 	public function tearDown()
@@ -35,7 +39,7 @@ class HttpfulClientTest extends \PHPUnit_Framework_TestCase
 		$this->request->shouldReceive('get')->with($url)->once()
 			->andReturn($this->request)->shouldReceive('expects')->with('application/json')->once()
 			->andReturn($this->request)->shouldReceive('send')->once()
-			->andReturn($this->request);
+			->andReturn($this->goodResponse);
 
 		$client = new HttpfulClient;
 
@@ -52,7 +56,7 @@ class HttpfulClientTest extends \PHPUnit_Framework_TestCase
 			->andReturn($this->request)->shouldReceive('expects')->with('application/json')->once()
 			->andReturn($this->request)->shouldReceive('body')->with(json_encode($this->params))->once()
 			->andReturn($this->request)->shouldReceive('send')->once()
-			->andReturn($this->request);
+			->andReturn($this->goodResponse);
 
 		$client = new HttpfulClient;
 
@@ -60,6 +64,21 @@ class HttpfulClientTest extends \PHPUnit_Framework_TestCase
 			$this->endpoint,
 			$this->params
 		));
+	}
+
+	public function testHasErrors()
+	{
+		// Construct the statically-mocked nightmare
+		$this->request->shouldReceive('get')
+			->andReturn($this->request)->shouldReceive('expects')
+			->andReturn($this->request)->shouldReceive('send')
+			->andReturn($this->badResponse);
+
+		$client = new HttpfulClient;
+
+		$client->get('');
+
+		$this->assertTrue($client->hasErrors());
 	}
 
 }
