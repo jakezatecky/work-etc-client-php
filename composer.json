@@ -1,0 +1,28 @@
+{
+	"name": "jakezatecky/work-etc-client-php",
+	"description": "A thin HTTP client for WORK[etc]'s API.",
+	"type": "library",
+	"keywords": ["WORK[etc]", "API", "client"],
+	"homepage": "https://github.com/jakezatecky/work-etc-client-php",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jake Zatecky"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/jakezatecky/work-etc-client-php/issues",
+		"source": "https://github.com/jakezatecky/work-etc-client-php"
+	},
+	"require": {
+		"php": ">=5.4"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.8"
+	},
+	"autoload": {
+		"psr-4": {
+			"WorkEtcClient\\": "src/WorkEtcClient"
+		}
+	}
+}
