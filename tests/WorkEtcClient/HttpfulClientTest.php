@@ -100,4 +100,20 @@ class HttpfulClientTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($client->hasErrors());
 	}
 
+	public function testEmptyArray()
+	{
+		// Construct the statically-mocked nightmare
+		$this->request->shouldReceive('post')
+			->andReturn($this->request)->shouldReceive('expects')
+			->andReturn($this->request)->shouldReceive('body')->with('{}')->once()
+			->andReturn($this->request)->shouldReceive('send')
+			->andReturn($this->badResponse);
+
+		$client = new HttpfulClient;
+
+		$client->post('');
+
+		$this->assertTrue($client->hasErrors());
+	}
+
 }

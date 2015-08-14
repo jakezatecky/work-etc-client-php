@@ -24,7 +24,7 @@ class HttpfulClient implements HttpInterface
 		$request = Request::get($endpoint . $this->buildQuery($parameters))
 			->expects('application/json');
 
-		return $this->send($request)->body;
+		return $this->send($request);
 	}
 
 	/**
@@ -39,9 +39,9 @@ class HttpfulClient implements HttpInterface
 	{
 		$request = Request::post($endpoint)
 			->expects('application/json')
-			->body(json_encode($parameters));
+			->body(json_encode($parameters, JSON_FORCE_OBJECT));
 
-		return $this->send($request)->body;
+		return $this->send($request);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class HttpfulClient implements HttpInterface
 
 		$this->hasErrors = $response->hasErrors();
 
-		return $response;
+		return json_decode(json_encode($response->body), true);
 	}
 
 	/**
