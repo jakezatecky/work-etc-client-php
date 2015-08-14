@@ -2,7 +2,7 @@
 	"name": "jakezatecky/work-etc-client-php",
 	"description": "A thin HTTP client for WORK[etc]'s API.",
 	"type": "library",
-	"keywords": ["WORK[etc]", "API", "client"],
+	"keywords": ["WORKetc", "API", "client"],
 	"homepage": "https://github.com/jakezatecky/work-etc-client-php",
 	"license": "MIT",
 	"authors": [
