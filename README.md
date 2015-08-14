@@ -1,7 +1,7 @@
 # WorkEtcClient
 
-**WorkEtcClient** is a thin HTTP client to the WORK[etc] API. It handles login
-authentication and simple invocations of the WORK[etc] operations.
+**WorkEtcClient** is a thin HTTP client to the WORK[etc] SOAP API. It handles
+login authentication and simple invocations of the WORK[etc] operations.
 
 ## Installation
 
@@ -27,7 +27,7 @@ $domain   = 'yourcompany';
 $email    = 'youremail@mail.com';
 $password = 'yourpassword';
 
-// Authenticate with WORK[etc] get access to the API
+// Authenticate with WORK[etc] and get access to the API
 $api = \WorkEtcClient\WorkEtcClient::connect($domain, $email, $password);
 
 // Invoke an operation without any parameters
