@@ -31,10 +31,10 @@ $password = 'yourpassword';
 $api = \WorkEtcClient\WorkEtcClient::connect($domain, $email, $password);
 
 // Invoke an operation without any parameters
-$stageGroups = $we->invoke('GetProjectStageGroups');
+$stageGroups = $api->invoke('GetProjectStageGroups');
 
 // Invoke an operation with parameters
-$projects = $we->invoke('FindProjects', [
+$projects = $api->invoke('FindProjects', [
 	'keywords' => 'Install',
 ]);
 ```
