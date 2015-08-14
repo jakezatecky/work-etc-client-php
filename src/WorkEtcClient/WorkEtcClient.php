@@ -125,7 +125,7 @@ class WorkEtcClient
 			$endpoint = $endpoint . '?VeetroSession=' . $this->sessionKey;
 		}
 
-		return $this->url . '/' . $endpoint;
+		return $this->url . '/json/' . $endpoint;
 	}
 
 	/**

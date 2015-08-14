@@ -17,7 +17,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('/BuildSupplyDepots', [])
+			->with('/json/BuildSupplyDepots', [])
 			->once()
 			->andReturn('Not enough minerals.')
 			->shouldReceive('hasErrors')
@@ -35,7 +35,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('/BuildSupplyDepots', ['minerals' => 100])
+			->with('/json/BuildSupplyDepots', ['minerals' => 100])
 			->once()
 			->andReturn('Sure thing.')
 			->shouldReceive('hasErrors')
@@ -55,7 +55,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('/BuildSupplyDepots', [])
+			->with('/json/BuildSupplyDepots', [])
 			->once()
 			->andReturn(['d' => 'Not enough minerals.'])
 			->shouldReceive('hasErrors')
@@ -77,7 +77,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('/FireYamatoCannon', [])
+			->with('/json/FireYamatoCannon', [])
 			->once()
 			->andReturn(['Message' => 'Not enough energy.'])
 			->shouldReceive('hasErrors')
@@ -99,7 +99,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('/TrainMarine', [])
+			->with('/json/TrainMarine', [])
 			->once()
 			->andReturn('Additional supply depots required.')
 			->shouldReceive('hasErrors')
@@ -117,7 +117,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('https://raynorsraiders.worketc.com/AuthenticateWebSafe', [
+			->with('https://raynorsraiders.worketc.com/json/AuthenticateWebSafe', [
 				'email' => 'jimmy',
 				'pass'  => 'kerrigan',
 			])
@@ -138,7 +138,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$interface
 			->shouldReceive('post')
-			->with('https://raynorsraiders.worketc.com/AuthenticateWebSafe', [
+			->with('https://raynorsraiders.worketc.com/json/AuthenticateWebSafe', [
 				'email' => 'jimmy',
 				'pass'  => 'kerrigan',
 			])
@@ -148,7 +148,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->once()
 			->andReturn(false)
 			->shouldReceive('post')
-			->with('https://raynorsraiders.worketc.com/QuitGame?VeetroSession=12345', [])
+			->with('https://raynorsraiders.worketc.com/json/QuitGame?VeetroSession=12345', [])
 			->once()
 			->andReturn('Quitting...')
 			->shouldReceive('hasErrors')
