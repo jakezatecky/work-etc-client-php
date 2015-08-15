@@ -1,6 +1,7 @@
 # WORK[etc] PHP Client
 
 [![Packagist](https://img.shields.io/packagist/v/jakezatecky/work-etc-client-php.svg)](https://packagist.org/packages/jakezatecky/work-etc-client-php)
+[![Build Status](https://travis-ci.org/jakezatecky/work-etc-client-php.svg?branch=master)](https://travis-ci.org/jakezatecky/work-etc-client-php)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
 
 **WorkEtcClient** is a thin HTTP client to the WORK[etc] SOAP API. It handles
