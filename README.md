@@ -1,5 +1,7 @@
 # WorkEtcClient
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
+
 **WorkEtcClient** is a thin HTTP client to the WORK[etc] SOAP API. It handles
 login authentication and simple invocations of the WORK[etc] operations.
 
