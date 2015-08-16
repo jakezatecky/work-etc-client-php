@@ -49,7 +49,7 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @param \Httpful\Request $request
 	 *
-	 * @return \Httpful\Response
+	 * @return array
 	 */
 	protected function send(Request $request)
 	{
