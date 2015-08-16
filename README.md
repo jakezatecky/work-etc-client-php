@@ -16,7 +16,7 @@ your `composer.json`:
 ``` json
 {
 	"require": {
-		"jakezatecky/work-etc-client-php": "~1.0.0"
+		"jakezatecky/work-etc-client": "~1.0.0"
 	}
 }
 ```
