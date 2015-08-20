@@ -1,4 +1,9 @@
-# WorkEtcClient
+# WORK[etc] PHP Client
+
+[![Packagist](https://img.shields.io/packagist/v/jakezatecky/work-etc-client.svg)](https://packagist.org/packages/jakezatecky/work-etc-client)
+[![Build Status](https://travis-ci.org/jakezatecky/work-etc-client-php.svg?branch=master)](https://travis-ci.org/jakezatecky/work-etc-client-php)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jakezatecky/work-etc-client-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jakezatecky/work-etc-client-php/?branch=master)
 
 **WorkEtcClient** is a thin HTTP client to the WORK[etc] SOAP API. It handles
 login authentication and simple invocations of the WORK[etc] operations.
@@ -10,9 +15,9 @@ your `composer.json`:
 
 ``` json
 {
-    "require": {
-        "jakezatecky/work-etc-client-php": "~1.0.0"
-    }
+	"require": {
+		"jakezatecky/work-etc-client": "~1.0.0"
+	}
 }
 ```
 
@@ -31,10 +36,10 @@ $password = 'yourpassword';
 $api = \WorkEtcClient\WorkEtcClient::connect($domain, $email, $password);
 
 // Invoke an operation without any parameters
-$stageGroups = $we->invoke('GetProjectStageGroups');
+$stageGroups = $api->invoke('GetProjectStageGroups');
 
 // Invoke an operation with parameters
-$projects = $we->invoke('FindProjects', [
+$projects = $api->invoke('FindProjects', [
 	'keywords' => 'Install',
 ]);
 ```

@@ -1,5 +1,5 @@
 {
-	"name": "jakezatecky/work-etc-client-php",
+	"name": "jakezatecky/work-etc-client",
 	"description": "A thin HTTP client for WORK[etc]'s API.",
 	"type": "library",
 	"keywords": ["WORKetc", "API", "client"],
