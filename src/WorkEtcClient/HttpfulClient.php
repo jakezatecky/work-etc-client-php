@@ -39,9 +39,28 @@ class HttpfulClient implements HttpInterface
 	{
 		$request = Request::post($endpoint)
 			->expects('application/json')
-			->body(json_encode($parameters, JSON_FORCE_OBJECT));
+			->body($this->jsonEncode($parameters));
 
 		return $this->send($request);
+	}
+
+	/**
+	 * Encode the given array to JSON. If the array would not translate to an
+	 * object, force it.
+	 *
+	 * WORK[etc] expects an object, even if that object would be empty.
+	 *
+	 * @param array $array
+	 *
+	 * @return string
+	 */
+	protected function jsonEncode(array $array)
+	{
+		if (empty($array)) {
+			return '{}';
+		}
+
+		return json_encode($array);
 	}
 
 	/**
@@ -49,7 +68,7 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @param \Httpful\Request $request
 	 *
-	 * @return \Httpful\Response
+	 * @return array
 	 */
 	protected function send(Request $request)
 	{
