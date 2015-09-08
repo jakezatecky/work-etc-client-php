@@ -25,7 +25,7 @@ your `composer.json`:
 
 Usage is simple. Invoke `WorkEtcClient::connect` and pass in your organization's
 domain, your email, and your password. Then, call the `invoke` method and pass
-in the relavent [operation][operation] and its required parameters as an array.
+in the relevant [operation][operation] and its required parameters as an array.
 
 ``` php
 $domain   = 'yourcompany';
