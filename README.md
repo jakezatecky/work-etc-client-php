@@ -1,4 +1,4 @@
-# WORK[etc] PHP Client
+# WORK[etc] Client for PHP
 
 [![Packagist](https://img.shields.io/packagist/v/jakezatecky/work-etc-client.svg)](https://packagist.org/packages/jakezatecky/work-etc-client)
 [![Build Status](https://travis-ci.org/jakezatecky/work-etc-client-php.svg?branch=master)](https://travis-ci.org/jakezatecky/work-etc-client-php)
