@@ -2,6 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/jakezatecky/work-etc-client.svg?style=flat-square)](https://packagist.org/packages/jakezatecky/work-etc-client)
 [![Build Status](https://img.shields.io/travis/jakezatecky/work-etc-client-php/master.svg?style=flat-square)](https://travis-ci.org/jakezatecky/work-etc-client-php)
+[![Dependency Status](https://www.versioneye.com/user/projects/5633e3e836d0ab0021001a90/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5633e3e836d0ab0021001a90)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jakezatecky/work-etc-client-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/jakezatecky/work-etc-client-php/?branch=master)
 
