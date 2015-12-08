@@ -47,7 +47,7 @@ class WorkEtcClient
 	 *
 	 * @return \WorkEtcClient\WorkEtcClient
 	 */
-	public static function connect($domain, $email, $password)
+	public static function connect(string $domain, string $email, string $password): WorkEtcClient
 	{
 		$client = new static(new HttpfulClient);
 
@@ -65,7 +65,7 @@ class WorkEtcClient
 	 *
 	 * @return void
 	 */
-	public function login($domain, $email, $password)
+	public function login(string $domain, string $email, string $password)
 	{
 		$this->registerDomain($domain);
 
@@ -82,7 +82,7 @@ class WorkEtcClient
 	 *
 	 * @return void
 	 */
-	protected function registerDomain($domain)
+	protected function registerDomain(string $domain)
 	{
 		$this->domain = $domain;
 
@@ -95,9 +95,9 @@ class WorkEtcClient
 	 * @param string $endpoint
 	 * @param array  $params
 	 *
-	 * @return array
+	 * @return array|string
 	 */
-	public function invoke($endpoint, $params = [])
+	public function invoke(string $endpoint, array $params = [])
 	{
 		$url = $this->buildUrl($endpoint);
 
@@ -119,7 +119,7 @@ class WorkEtcClient
 	 *
 	 * @return string
 	 */
-	protected function buildUrl($endpoint)
+	protected function buildUrl(string $endpoint): string
 	{
 		if ($this->sessionKey !== null) {
 			$endpoint = $endpoint . '?VeetroSession=' . $this->sessionKey;
@@ -136,10 +136,9 @@ class WorkEtcClient
 	 *
 	 * @return void
 	 *
-	 * @throws \WorkEtcClient\WorkEtcException if the HTTP response code is 400
-	 *                                         or above.
+	 * @throws \WorkEtcClient\WorkEtcException if the HTTP response code is 400 or above.
 	 */
-	protected function checkErrors($response)
+	protected function checkErrors(array $response)
 	{
 		if ($this->httpClient->hasErrors() === false) {
 			return;

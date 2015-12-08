@@ -19,14 +19,14 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->shouldReceive('post')
 			->with('/json/BuildSupplyDepots', [])
 			->once()
-			->andReturn('Not enough minerals.')
+			->andReturn(['Not enough minerals.'])
 			->shouldReceive('hasErrors')
 			->once()
 			->andReturn(false);
 
 		$client = new WorkEtcClient($interface);
 
-		$this->assertEquals('Not enough minerals.', $client->invoke('BuildSupplyDepots'));
+		$this->assertEquals(['Not enough minerals.'], $client->invoke('BuildSupplyDepots'));
 	}
 
 	public function testParameterizedInvoke()
@@ -37,14 +37,14 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->shouldReceive('post')
 			->with('/json/BuildSupplyDepots', ['minerals' => 100])
 			->once()
-			->andReturn('Sure thing.')
+			->andReturn(['Sure thing.'])
 			->shouldReceive('hasErrors')
 			->once()
 			->andReturn(false);
 
 		$client = new WorkEtcClient($interface);
 
-		$this->assertEquals('Sure thing.', $client->invoke('BuildSupplyDepots', [
+		$this->assertEquals(['Sure thing.'], $client->invoke('BuildSupplyDepots', [
 			'minerals' => 100
 		]));
 	}
@@ -57,14 +57,14 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->shouldReceive('post')
 			->with('/json/BuildSupplyDepots', [])
 			->once()
-			->andReturn(['d' => 'Not enough minerals.'])
+			->andReturn(['d' => ['Not enough minerals.']])
 			->shouldReceive('hasErrors')
 			->once()
 			->andReturn(false);
 
 		$client = new WorkEtcClient($interface);
 
-		$this->assertEquals('Not enough minerals.', $client->invoke('BuildSupplyDepots'));
+		$this->assertEquals(['Not enough minerals.'], $client->invoke('BuildSupplyDepots'));
 	}
 
 	/**
@@ -91,7 +91,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException \WorkEtcClient\WorkEtcException
-	 * @expectedExceptionMessage Unknown error.; response = "Additional supply depots required."
+	 * @expectedExceptionMessage Unknown error.; response = ["Additional supply depots required."]
 	 */
 	public function testUnknownError()
 	{
@@ -101,7 +101,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->shouldReceive('post')
 			->with('/json/TrainMarine', [])
 			->once()
-			->andReturn('Additional supply depots required.')
+			->andReturn(['Additional supply depots required.'])
 			->shouldReceive('hasErrors')
 			->once()
 			->andReturn(true);
@@ -150,7 +150,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 			->shouldReceive('post')
 			->with('https://raynorsraiders.worketc.com/json/QuitGame?VeetroSession=12345', [])
 			->once()
-			->andReturn('Quitting...')
+			->andReturn(['Quitting...'])
 			->shouldReceive('hasErrors')
 			->once()
 			->andReturn(false);
@@ -159,7 +159,7 @@ class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
 
 		$client->login('raynorsraiders', 'jimmy', 'kerrigan');
 
-		$this->assertEquals('Quitting...', $client->invoke('QuitGame'));
+		$this->assertEquals(['Quitting...'], $client->invoke('QuitGame'));
 	}
 
 }

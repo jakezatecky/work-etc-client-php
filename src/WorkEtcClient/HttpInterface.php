@@ -13,9 +13,9 @@ interface HttpInterface
 	 * @param string $endpoint
 	 * @param array  $parameters
 	 *
-	 * @return array
+	 * @return array|string
 	 */
-	public function get($endpoint, array $parameters = []);
+	public function get(string $endpoint, array $parameters = []);
 
 	/**
 	 * Invoke a POST request.
@@ -23,15 +23,15 @@ interface HttpInterface
 	 * @param string $endpoint
 	 * @param array  $parameters
 	 *
-	 * @return array
+	 * @return array|string
 	 */
-	public function post($endpoint, array $parameters = []);
+	public function post(string $endpoint, array $parameters = []);
 
 	/**
 	 * Returns whether or not errors have occurred.
 	 *
 	 * @return bool
 	 */
-	public function hasErrors();
+	public function hasErrors(): bool;
 
 }

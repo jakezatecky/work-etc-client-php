@@ -17,9 +17,9 @@ class HttpfulClient implements HttpInterface
 	 * @param string $endpoint
 	 * @param array  $parameters
 	 *
-	 * @return array
+	 * @return array|string
 	 */
-	public function get($endpoint, array $parameters = [])
+	public function get(string $endpoint, array $parameters = [])
 	{
 		$request = Request::get($endpoint . $this->buildQuery($parameters))
 			->expects('application/json');
@@ -33,9 +33,9 @@ class HttpfulClient implements HttpInterface
 	 * @param string $endpoint
 	 * @param array  $parameters
 	 *
-	 * @return array
+	 * @return array|string
 	 */
-	public function post($endpoint, array $parameters = [])
+	public function post(string $endpoint, array $parameters = [])
 	{
 		$request = Request::post($endpoint)
 			->expects('application/json')
@@ -54,7 +54,7 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @return string
 	 */
-	protected function jsonEncode(array $array)
+	protected function jsonEncode(array $array): string
 	{
 		if (empty($array)) {
 			return '{}';
@@ -68,7 +68,7 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @param \Httpful\Request $request
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	protected function send(Request $request)
 	{
@@ -86,10 +86,10 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @return string
 	 */
-	protected function buildQuery(array $data = [])
+	protected function buildQuery(array $data = []): string
 	{
 		if (count($data) === 0) {
-			return null;
+			return '';
 		}
 
 		return '?' . http_build_query($data);
@@ -100,7 +100,7 @@ class HttpfulClient implements HttpInterface
 	 *
 	 * @return bool
 	 */
-	public function hasErrors()
+	public function hasErrors(): bool
 	{
 		return $this->hasErrors;
 	}

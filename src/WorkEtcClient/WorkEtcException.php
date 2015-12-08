@@ -12,7 +12,7 @@ class WorkEtcException extends \Exception
 	/**
 	 * @param array $response
 	 */
-	public function __construct($response)
+	public function __construct(array $response)
 	{
 		$message = $this->buildMessage($response);
 
@@ -26,7 +26,7 @@ class WorkEtcException extends \Exception
 	 *
 	 * @return string
 	 */
-	protected function buildMessage($response)
+	protected function buildMessage(array $response): string
 	{
 		$message = isset($response['Message'])
 			? $response['Message']
