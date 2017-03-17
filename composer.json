@@ -15,12 +15,12 @@
 		"source": "https://github.com/jakezatecky/work-etc-client-php"
 	},
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7",
 		"nategood/httpful": "^0.2.20"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^5.2.3",
-		"mockery/mockery": "dev-master"
+		"mockery/mockery": "^0.9.9"
 	},
 	"autoload": {
 		"psr-4": {
