@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use WorkEtcClient\HttpfulClient;
 
 class GoodResponse
@@ -24,7 +25,7 @@ class BadResponse
 }
 
 
-class HttpfulClientTest extends \PHPUnit_Framework_TestCase
+class HttpfulClientTest extends TestCase
 {
 
 	public function setUp()

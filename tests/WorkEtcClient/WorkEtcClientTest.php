@@ -1,9 +1,10 @@
 <?php
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use WorkEtcClient\WorkEtcClient;
 
-class WorkEtcClientTest extends \PHPUnit_Framework_TestCase
+class WorkEtcClientTest extends TestCase
 {
 
 	public function tearDown()
