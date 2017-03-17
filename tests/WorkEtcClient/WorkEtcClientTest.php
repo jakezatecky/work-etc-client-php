@@ -131,6 +131,9 @@ class WorkEtcClientTest extends TestCase
 		$client = new WorkEtcClient($interface);
 
 		$client->login('raynorsraiders', 'jimmy', 'kerrigan');
+
+		// No exception should be thrown
+		$this->assertTrue(true);
 	}
 
 	public function testAuthenticatedInvoke()
