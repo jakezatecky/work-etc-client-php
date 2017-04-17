@@ -16,9 +16,9 @@ your `composer.json`:
 
 ``` json
 {
-	"require": {
-		"jakezatecky/work-etc-client": "^2.0.0"
-	}
+    "require": {
+        "jakezatecky/work-etc-client": "^2.0.0"
+    }
 }
 ```
 
@@ -41,7 +41,7 @@ $stageGroups = $api->invoke('GetProjectStageGroups');
 
 // Invoke an operation with parameters
 $projects = $api->invoke('FindProjects', [
-	'keywords' => 'Install',
+    'keywords' => 'Install',
 ]);
 ```
 
