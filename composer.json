@@ -15,7 +15,7 @@
 		"source": "https://github.com/jakezatecky/work-etc-client-php"
 	},
 	"require": {
-		"php": ">=7",
+		"php": "^7.0",
 		"nategood/httpful": "^0.2.20"
 	},
 	"require-dev": {
