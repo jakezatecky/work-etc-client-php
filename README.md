@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jakezatecky/work-etc-client-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/jakezatecky/work-etc-client-php/?branch=master)
 
-**WorkEtcClient** is a thin HTTP client to the WORK[etc] SOAP API. It handles
+**WorkEtcClient** is a thin HTTP client to the [WORK\[etc\] API]. It handles
 login authentication and simple invocations of the WORK[etc] operations.
 
 ## Installation
@@ -26,7 +26,7 @@ your `composer.json`:
 
 Usage is simple. Invoke `WorkEtcClient::connect` and pass in your organization's
 domain, your email, and your password. Then, call the `invoke` method and pass
-in the relevant [operation][operation] and its required parameters as an array.
+in the relevant [operation] and its required parameters as an associative array.
 
 ``` php
 $domain   = 'yourcompany';
@@ -57,3 +57,4 @@ https://yourcompany.worketc.com
 MIT license.
 
 [operation]: http://admin.worketc.com/xml
+[WORK\[etc\] API]: https://www.worketc.com/developers/
