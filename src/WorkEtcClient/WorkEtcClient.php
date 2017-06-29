@@ -1,4 +1,5 @@
 <?php
+
 namespace WorkEtcClient;
 
 use InvalidArgumentException;
@@ -9,142 +10,140 @@ use WorkEtcClient\HttpfulClient;
  */
 class WorkEtcClient
 {
+    /**
+     * @var \WorkEtcClient\HttpInterface
+     */
+    protected $httpClient;
 
-	/**
-	 * @var \WorkEtcClient\HttpInterface
-	 */
-	protected $httpClient;
+    /**
+     * @var string
+     */
+    protected $domain = null;
 
-	/**
-	 * @var string
-	 */
-	protected $domain = null;
+    /**
+     * @var string
+     */
+    protected $url = null;
 
-	/**
-	 * @var string
-	 */
-	protected $url = null;
+    /**
+     * @var string
+     */
+    protected $sessionKey = null;
 
-	/**
-	 * @var string
-	 */
-	protected $sessionKey = null;
+    /**
+     * @param \WorkEtcClient\HttpInterface
+     */
+    public function __construct(HttpInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
 
-	/**
-	 * @param \WorkEtcClient\HttpInterface
-	 */
-	public function __construct(HttpInterface $httpClient)
-	{
-		$this->httpClient = $httpClient;
-	}
+    /**
+     * Connect to WORK[etc] and return the connection.
+     *
+     * @param string $domain
+     * @param string $email
+     * @param string $password
+     *
+     * @return \WorkEtcClient\WorkEtcClient
+     */
+    public static function connect(string $domain, string $email, string $password): WorkEtcClient
+    {
+        $client = new static(new HttpfulClient);
 
-	/**
-	 * Connect to WORK[etc] and return the connection.
-	 *
-	 * @param string $domain
-	 * @param string $email
-	 * @param string $password
-	 *
-	 * @return \WorkEtcClient\WorkEtcClient
-	 */
-	public static function connect(string $domain, string $email, string $password): WorkEtcClient
-	{
-		$client = new static(new HttpfulClient);
+        $client->login($domain, $email, $password);
 
-		$client->login($domain, $email, $password);
+        return $client;
+    }
 
-		return $client;
-	}
+    /**
+     * Authenticate into WORK[etc].
+     *
+     * @param string $domain
+     * @param string $email
+     * @param string $password
+     *
+     * @return void
+     */
+    public function login(string $domain, string $email, string $password)
+    {
+        $this->registerDomain($domain);
 
-	/**
-	 * Authenticate into WORK[etc].
-	 *
-	 * @param string $domain
-	 * @param string $email
-	 * @param string $password
-	 *
-	 * @return void
-	 */
-	public function login(string $domain, string $email, string $password)
-	{
-		$this->registerDomain($domain);
+        $result = $this->invoke('AuthenticateWebSafe', [
+            'email' => $email,
+            'pass' => $password,
+        ]);
 
-		$result = $this->invoke('AuthenticateWebSafe', [
-			'email' => $email,
-			'pass'  => $password,
-		]);
+        $this->sessionKey = $result['SessionKey'];
+    }
 
-		$this->sessionKey = $result['SessionKey'];
-	}
+    /**
+     * @param string $domain
+     *
+     * @return void
+     */
+    protected function registerDomain(string $domain)
+    {
+        $this->domain = $domain;
 
-	/**
-	 * @param string $domain
-	 *
-	 * @return void
-	 */
-	protected function registerDomain(string $domain)
-	{
-		$this->domain = $domain;
+        $this->url = 'https://' . $domain . '.worketc.com';
+    }
 
-		$this->url = 'https://' . $domain . '.worketc.com';
-	}
+    /**
+     * Invoke the given method and return the result.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     *
+     * @return array|string
+     */
+    public function invoke(string $endpoint, array $params = [])
+    {
+        $url = $this->buildUrl($endpoint);
 
-	/**
-	 * Invoke the given method and return the result.
-	 *
-	 * @param string $endpoint
-	 * @param array  $params
-	 *
-	 * @return array|string
-	 */
-	public function invoke(string $endpoint, array $params = [])
-	{
-		$url = $this->buildUrl($endpoint);
+        $response = $this->httpClient->post($url, $params);
 
-		$response = $this->httpClient->post($url, $params);
+        $this->checkErrors($response);
 
-		$this->checkErrors($response);
+        // Account for WORK[etc]'s random addition of a top-level associative
+        // array
+        $response = isset($response['d']) ? $response['d'] : $response;
 
-		// Account for WORK[etc]'s random addition of a top-level associative
-		// array
-		$response = isset($response['d']) ? $response['d'] : $response;
+        return $response;
+    }
 
-		return $response;
-	}
+    /**
+     * Build the URL from the registered domain and the endpoint.
+     *
+     * @param string $endpoint
+     *
+     * @return string
+     */
+    protected function buildUrl(string $endpoint): string
+    {
+        if ($this->sessionKey !== null) {
+            $endpoint = $endpoint . '?VeetroSession=' . $this->sessionKey;
+        }
 
-	/**
-	 * Build the URL from the registered domain and the endpoint.
-	 *
-	 * @param string $endpoint
-	 *
-	 * @return string
-	 */
-	protected function buildUrl(string $endpoint): string
-	{
-		if ($this->sessionKey !== null) {
-			$endpoint = $endpoint . '?VeetroSession=' . $this->sessionKey;
-		}
+        return $this->url . '/json/' . $endpoint;
+    }
 
-		return $this->url . '/json/' . $endpoint;
-	}
+    /**
+     * Check if the WORK[etc] response had errors and attempts to parse them if
+     * so.
+     *
+     * @param array $response
+     *
+     * @return void
+     *
+     * @throws \WorkEtcClient\WorkEtcException if the HTTP response code is 400 or above.
+     */
+    protected function checkErrors(array $response)
+    {
+        if ($this->httpClient->hasErrors() === false) {
+            return;
+        }
 
-	/**
-	 * Check if the WORK[etc] response had errors and attempts to parse them if
-	 * so.
-	 *
-	 * @param array $response
-	 *
-	 * @return void
-	 *
-	 * @throws \WorkEtcClient\WorkEtcException if the HTTP response code is 400 or above.
-	 */
-	protected function checkErrors(array $response)
-	{
-		if ($this->httpClient->hasErrors() === false) {
-			return;
-		}
-
-		throw new WorkEtcException($response);
-	}
-
+        throw new WorkEtcException($response);
+    }
 }
