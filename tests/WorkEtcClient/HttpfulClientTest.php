@@ -56,7 +56,7 @@ class HttpfulClientTest extends TestCase
 
         // Construct the statically-mocked nightmare
         $this->request->shouldReceive('get')->with($url)->once()
-            ->andReturn($this->request)->shouldReceive('expects')->with('application/json')->once()
+            ->andReturn($this->request)->shouldReceive('expectsType')->with('application/json')->once()
             ->andReturn($this->request)->shouldReceive('send')->once()
             ->andReturn($this->goodResponse);
 
@@ -72,7 +72,7 @@ class HttpfulClientTest extends TestCase
     {
         // Construct the statically-mocked nightmare
         $this->request->shouldReceive('post')->with($this->endpoint)->once()
-            ->andReturn($this->request)->shouldReceive('expects')->with('application/json')->once()
+            ->andReturn($this->request)->shouldReceive('expectsType')->with('application/json')->once()
             ->andReturn($this->request)->shouldReceive('body')->with(json_encode($this->params))->once()
             ->andReturn($this->request)->shouldReceive('send')->once()
             ->andReturn($this->goodResponse);
@@ -89,7 +89,7 @@ class HttpfulClientTest extends TestCase
     {
         // Construct the statically-mocked nightmare
         $this->request->shouldReceive('get')
-            ->andReturn($this->request)->shouldReceive('expects')
+            ->andReturn($this->request)->shouldReceive('expectsType')
             ->andReturn($this->request)->shouldReceive('send')
             ->andReturn($this->badResponse);
 
@@ -104,7 +104,7 @@ class HttpfulClientTest extends TestCase
     {
         // Construct the statically-mocked nightmare
         $this->request->shouldReceive('post')
-            ->andReturn($this->request)->shouldReceive('expects')
+            ->andReturn($this->request)->shouldReceive('expectsType')
             ->andReturn($this->request)->shouldReceive('body')->with('{}')->once()
             ->andReturn($this->request)->shouldReceive('send')
             ->andReturn($this->badResponse);
