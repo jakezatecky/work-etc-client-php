@@ -24,7 +24,7 @@ class HttpfulClient implements HttpInterface
     public function get(string $endpoint, array $parameters = [])
     {
         $request = Request::get($endpoint . $this->buildQuery($parameters))
-            ->expects('application/json');
+            ->expectsType('application/json');
 
         return $this->send($request);
     }
@@ -42,7 +42,7 @@ class HttpfulClient implements HttpInterface
     public function post(string $endpoint, array $parameters = [])
     {
         $request = Request::post($endpoint)
-            ->expects('application/json')
+            ->expectsType('application/json')
             ->body($this->jsonEncode($parameters));
 
         return $this->send($request);
