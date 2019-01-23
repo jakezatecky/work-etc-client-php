@@ -18,6 +18,8 @@ class HttpfulClient implements HttpInterface
      * @param array  $parameters
      *
      * @return array|string
+     *
+     * @throws \Httpful\Exception\ConnectionErrorException
      */
     public function get(string $endpoint, array $parameters = [])
     {
@@ -34,6 +36,8 @@ class HttpfulClient implements HttpInterface
      * @param array  $parameters
      *
      * @return array|string
+     *
+     * @throws \Httpful\Exception\ConnectionErrorException
      */
     public function post(string $endpoint, array $parameters = [])
     {
@@ -69,6 +73,8 @@ class HttpfulClient implements HttpInterface
      * @param \Httpful\Request $request
      *
      * @return array|string
+     *
+     * @throws \Httpful\Exception\ConnectionErrorException
      */
     protected function send(Request $request)
     {
