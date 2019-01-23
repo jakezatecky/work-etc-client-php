@@ -2,9 +2,6 @@
 
 namespace WorkEtcClient;
 
-use InvalidArgumentException;
-use WorkEtcClient\HttpfulClient;
-
 /**
  * A thin HTTP client for WORK[etc]'s API.
  */
@@ -64,6 +61,8 @@ class WorkEtcClient
      * @param string $password
      *
      * @return void
+     *
+     * @throws \WorkEtcClient\WorkEtcException
      */
     public function login(string $domain, string $email, string $password)
     {
@@ -96,6 +95,8 @@ class WorkEtcClient
      * @param array  $params
      *
      * @return array|string
+     *
+     * @throws \WorkEtcClient\WorkEtcException
      */
     public function invoke(string $endpoint, array $params = [])
     {
