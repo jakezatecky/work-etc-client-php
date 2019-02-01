@@ -6,7 +6,7 @@ use WorkEtcClient\WorkEtcClient;
 
 class WorkEtcClientTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -14,7 +14,6 @@ class WorkEtcClientTest extends TestCase
     public function testSimpleInvoke()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('/json/BuildSupplyDepots', [])
@@ -32,7 +31,6 @@ class WorkEtcClientTest extends TestCase
     public function testParameterizedInvoke()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('/json/BuildSupplyDepots', ['minerals' => 100])
@@ -41,7 +39,6 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(false);
-
         $client = new WorkEtcClient($interface);
 
         $this->assertEquals(['Sure thing.'], $client->invoke('BuildSupplyDepots', [
@@ -52,7 +49,6 @@ class WorkEtcClientTest extends TestCase
     public function testInvokeWithWrapperResponse()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('/json/BuildSupplyDepots', [])
@@ -61,20 +57,14 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(false);
-
         $client = new WorkEtcClient($interface);
 
         $this->assertEquals(['Not enough minerals.'], $client->invoke('BuildSupplyDepots'));
     }
 
-    /**
-     * @expectedException \WorkEtcClient\WorkEtcException
-     * @expectedExceptionMessage Not enough energy.; response = {"Message":"Not enough energy."}
-     */
     public function testKnownError()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('/json/FireYamatoCannon', [])
@@ -83,20 +73,16 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(true);
-
         $client = new WorkEtcClient($interface);
 
+        $this->expectException('\WorkEtcClient\WorkEtcException');
+        $this->expectExceptionMessage('Not enough energy.; response = {"Message":"Not enough energy."}');
         $client->invoke('FireYamatoCannon');
     }
 
-    /**
-     * @expectedException \WorkEtcClient\WorkEtcException
-     * @expectedExceptionMessage Unknown error.; response = ["Additional supply depots required."]
-     */
     public function testUnknownError()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('/json/TrainMarine', [])
@@ -105,16 +91,16 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(true);
-
         $client = new WorkEtcClient($interface);
 
+        $this->expectException('\WorkEtcClient\WorkEtcException');
+        $this->expectExceptionMessage('Unknown error.; response = ["Additional supply depots required."]');
         $client->invoke('TrainMarine');
     }
 
     public function testLogin()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('https://raynorsraiders.worketc.com/json/AuthenticateWebSafe', [
@@ -126,19 +112,16 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(false);
-
         $client = new WorkEtcClient($interface);
 
-        $client->login('raynorsraiders', 'jimmy', 'kerrigan');
-
         // No exception should be thrown
+        $client->login('raynorsraiders', 'jimmy', 'kerrigan');
         $this->assertTrue(true);
     }
 
     public function testAuthenticatedInvoke()
     {
         $interface = m::mock('WorkEtcClient\HttpInterface');
-
         $interface
             ->shouldReceive('post')
             ->with('https://raynorsraiders.worketc.com/json/AuthenticateWebSafe', [
@@ -157,11 +140,9 @@ class WorkEtcClientTest extends TestCase
             ->shouldReceive('hasErrors')
             ->once()
             ->andReturn(false);
-
         $client = new WorkEtcClient($interface);
 
         $client->login('raynorsraiders', 'jimmy', 'kerrigan');
-
         $this->assertEquals(['Quitting...'], $client->invoke('QuitGame'));
     }
 }
