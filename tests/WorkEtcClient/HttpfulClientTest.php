@@ -27,7 +27,14 @@ class BadResponse
 
 class HttpfulClientTest extends TestCase
 {
-    public function setUp()
+    private $response;
+    private $endpoint;
+    private $params;
+    private $request;
+    private $goodResponse;
+    private $badResponse;
+
+    public function setUp(): void
     {
         $this->response = 'SCV ready!';
 
@@ -44,7 +51,7 @@ class HttpfulClientTest extends TestCase
         $this->badResponse = new BadResponse();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
