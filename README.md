@@ -1,7 +1,7 @@
 # WORK[etc] Client for PHP
 
 [![Packagist](https://img.shields.io/packagist/v/jakezatecky/work-etc-client.svg?style=flat-square)](https://packagist.org/packages/jakezatecky/work-etc-client)
-[![Build Status](https://img.shields.io/travis/com/jakezatecky/work-etc-client-php/master.svg?style=flat-square)](https://www.travis-ci.com/jakezatecky/work-etc-client-php)
+[![Build Status](https://img.shields.io/github/workflow/status/jakezatecky/work-etc-client/Build?style=flat-square)](https://github.com/jakezatecky/work-etc-client/actions/workflows/main.yml)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/jakezatecky/work-etc-client-php/master/LICENSE.txt)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jakezatecky/work-etc-client-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/jakezatecky/work-etc-client-php/?branch=master)
 
